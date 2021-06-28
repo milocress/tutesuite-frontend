@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/tutesuite-frontend/static/css/main.d70d45c5.chunk.css",
-    "main.js": "/tutesuite-frontend/static/js/main.f3edab60.chunk.js",
-    "main.js.map": "/tutesuite-frontend/static/js/main.f3edab60.chunk.js.map",
+    "main.js": "/tutesuite-frontend/static/js/main.98614944.chunk.js",
+    "main.js.map": "/tutesuite-frontend/static/js/main.98614944.chunk.js.map",
     "runtime-main.js": "/tutesuite-frontend/static/js/runtime-main.32db759c.js",
     "runtime-main.js.map": "/tutesuite-frontend/static/js/runtime-main.32db759c.js.map",
     "static/css/2.4f8976c6.chunk.css": "/tutesuite-frontend/static/css/2.4f8976c6.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.4f8976c6.chunk.css",
     "static/js/2.203c6343.chunk.js",
     "static/css/main.d70d45c5.chunk.css",
-    "static/js/main.f3edab60.chunk.js"
+    "static/js/main.98614944.chunk.js"
   ]
 }
