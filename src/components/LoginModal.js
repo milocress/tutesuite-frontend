@@ -75,7 +75,7 @@ export default class LoginModal extends Component {
         <ModalFooter>
           <Button
             color="success"
-            onClick={() => { login(this.state.username, this.state.password, this.login_success, this.login_fail) }}
+            onClick={() => { login(this.state.username, this.state.password).then(this.login_success).catch(this.login_fail) }}
           >
             Login
           </Button>

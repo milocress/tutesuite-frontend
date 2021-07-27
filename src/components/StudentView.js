@@ -1,8 +1,10 @@
 import { Component } from "react";
-import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Row, Col, Form, FormGroup, Label, Input, Button, Spinner } from 'reactstrap';
 
-import { handle_change } from '../utils/combinators';
+import JitsiModal from "./JitsiModal";
+import SessionCard from "./SessionCard"
 
+import { handle_change, create_room_name } from '../utils/combinators';
 
 export default class StudentView extends Component {
   constructor(props) {
@@ -10,8 +12,13 @@ export default class StudentView extends Component {
     this.state = { 
       active_request: false,
       description: "",
-      subject: ""
+      subject: "",
+      past_sessions: []
     }
+  }
+
+  componentDidMount = () => {
+    this.refresh()
   }
 
   create_request = () => {
@@ -19,23 +26,46 @@ export default class StudentView extends Component {
     this.props.api('create_request', {
       description: this.state.description,
       subject: this.state.subject
-    }, this.handle_request, this.handle_fail)
+    }).then(this.handle_request).catch(this.handle_fail)
   }
 
   handle_request = (success) => {
     console.log(success)
-    this.setState({active_request: JSON.stringify(success)})
+    this.setState({active_request: success})
+  }
+
+  refresh = () => {
+    if (this.state.active_request) {
+      this.props.api('get_request', {
+        rid: this.state.active_request.id
+      }).then((request) => {
+        this.setState({active_request: request})
+      })
+    }
+
+    this.props.api('past_sessions', {}).then((sessions) => {
+      console.log(sessions)
+      this.setState({past_sessions: sessions})
+    })
   }
 
   handle_fail = (err) => {
     console.log(err)
   }
 
-  render() {
+  toggle = () => {
+    this.setState({active_request: null})
+  }
+
+  render = () => {
     return !this.state.active_request ? (
       <Row className="justify-content-center">
-      <h2 className="display-5 fw-bold">Request a Tutor</h2>
       <Col className="my-5" lg={7}>
+        <h2 className="display-5 fw-bold">Rate Your Sessions</h2>
+        {this.state.past_sessions.map((sess, i) => 
+          <SessionCard key={i} session={sess} light={this.props.light} api={this.props.api}>{JSON.stringify(sess)}</SessionCard>
+        )}
+        <h2 className="display-5 fw-bold">Request a Tutor</h2>
         <Form>
           <FormGroup>
             <Label for="request-subject">Enter Your Subject</Label>
@@ -57,8 +87,13 @@ export default class StudentView extends Component {
         </Form>
       </Col>
     </Row>
-    ) : (
-      <div><code>{this.state.active_request}</code></div>
+    ) : ( 
+        (this.state.active_request.session.length === 0)
+        ? <div>Pending: <br/> 
+            <Spinner/><br/> 
+            <Button onClick={this.refresh}>Refresh</Button>
+          </div>
+        : <JitsiModal toggle={this.toggle} sid={this.state.active_request.id} api={this.props.api}></JitsiModal>
     );
   }
 }

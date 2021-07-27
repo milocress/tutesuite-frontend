@@ -113,7 +113,7 @@ export default class SignupModal extends Component {
               first_name: first_name,
               last_name: last_name,
               email: email
-            }, this.signup_success, this.signup_fail) }}
+            }).then(this.signup_success).catch(this.signup_fail) }}
           >
             Sign Up
           </Button>

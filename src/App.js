@@ -10,8 +10,10 @@ import TutorView from './components/TutorView';
 import ColorTheme from './components/ColorTheme';
 
 import { api } from './utils/api';
+import PaymentModal from './components/PaymentModal';
+import { withCookies } from 'react-cookie';
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,6 +33,20 @@ export default class App extends Component {
       user: user,
       api: api(creds)
     })
+    this.props.cookies.set('creds', creds, {path: '/'})
+  }
+
+  componentDidMount = () => {
+    const creds = this.props.cookies.get('creds')
+    if (creds) {
+      const { token, user } = creds
+      this.setState({
+        is_logged_in: true,
+        token: token,
+        user: user,
+        api: api(creds)
+      })
+    }
   }
 
   render() {
@@ -60,8 +76,14 @@ export default class App extends Component {
             {
               this.state.is_logged_in 
               ? <div>
-                  <UserInfo user={this.state.user}/> 
-                  <StudentView api={this.state.api}/>
+                  {this.state.user.student[0].amount_owed && false
+                  ? <PaymentModal 
+                      money={this.state.user.student[0].amount_owed} 
+                      sid={this.state.user.student[0].id}
+                      api={this.state.api} />
+                  : null}
+                  {/* <UserInfo user={this.state.user}/>  */}
+                  <StudentView api={this.state.api} light={this.state.light}/>
                   <TutorView api={this.state.api} light={this.state.light}/>
                 </div> 
               : null
@@ -72,3 +94,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default withCookies(App)

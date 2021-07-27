@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText, Alert } from 'reactstrap';
-import Jitsi from "react-jitsi";
+import { Row, Col, Alert, Button } from 'reactstrap';
 
-import { create_room_link, create_room_name } from "../utils/combinators";
-
+import RequestCard from "./RequestCard";
 
 export default class TutorView extends Component {
   constructor(props) {
@@ -12,14 +10,13 @@ export default class TutorView extends Component {
       requests: [{
         date: 'Date',
         subject: 'Subject',
-        student: 'Student',
+        student: {user: {username: 'Student'}},
         accepted_tutors: 'Accepted Tutors',
         active: 'Active',
         pk: 'Key'
       }],
       hide_failure: true,
       request_failure: "",
-
     }
   }
 
@@ -37,46 +34,33 @@ export default class TutorView extends Component {
     })
   }
 
-  render() {
+  refresh = () => {
+    this.props.api('get_requests', null).then(this.handle_requests).catch(this.handle_request_fail)
+  }
+
+  render = () => {
     return (
       <Row className="justify-content-center">
       <h2 className="display-5 fw-bold">Tutor a Student</h2>
       <Col className="my-5" lg={7}>
-        <Alert color='danger' hidden={this.state.hide_failure}>{this.state.request_failure}</Alert>
-        <div className="lead mb-4">
-          {this.state.requests.map((req, i) => <div key={i}>{this.render_req(req)}<br/></div>)}
-        </div>
+        <Button onClick={this.refresh}>Refresh</Button>
+        { this.state.current_session
+        ? <p>Session</p>
+        : <div>
+            <Alert color='danger' hidden={this.state.hide_failure}>{this.state.request_failure}</Alert>
+            <div className="lead mb-4">
+              {this.state.requests.map((req, i) => 
+                <RequestCard req={req} light={this.props.light} api={this.props.api} key={i}/>)
+              }
+            </div>
+          </div>
+        }
       </Col>
     </Row>
     );
   }
 
-  render_req = (req) => {
-    return (
-      <Card className={this.props.light ? "bg-white" : "bg-secondary"}>
-        <CardBody>
-          <CardTitle tag="h5">{JSON.stringify(req.student)}</CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">{JSON.stringify(req.description)}</CardSubtitle>
-          <CardText>
-            { console.log(req) }
-            Subject: <code>{JSON.stringify(req.subject)}</code> <br/>
-            Date: <code>{req.date}</code> <br/>
-            Accepted Tutors: <code>{JSON.stringify(JSON.stringify(req.accepted_tutors))}</code> <br/>
-            Active: <code>{JSON.stringify(req.active)}</code> <br/>
-            Key: <code>{req.pk}</code> <br/>
-            <a href={create_room_link("https://localhost", req.id)}>Link</a>
-            {/* <Jitsi domain="meet.jit.si" roomName={create_room_name(req.id )}/> */}
-          </CardText>
-        </CardBody>
-      </Card>
-    )
-  }
-
-  render_raw = (req) => {
-    return <code>{JSON.stringify(req)}</code>
-  }
-
   componentDidMount() {
-    this.props.api('get_requests', null, this.handle_requests, this.handle_request_fail);
+    this.refresh()
   }
 }
