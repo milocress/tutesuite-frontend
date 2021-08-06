@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/tutesuite-frontend/static/css/main.d70d45c5.chunk.css",
-    "main.js": "/tutesuite-frontend/static/js/main.0e7040bf.chunk.js",
-    "main.js.map": "/tutesuite-frontend/static/js/main.0e7040bf.chunk.js.map",
-    "runtime-main.js": "/tutesuite-frontend/static/js/runtime-main.ddfbdb23.js",
-    "runtime-main.js.map": "/tutesuite-frontend/static/js/runtime-main.ddfbdb23.js.map",
+    "main.js": "/tutesuite-frontend/static/js/main.041e3f53.chunk.js",
+    "main.js.map": "/tutesuite-frontend/static/js/main.041e3f53.chunk.js.map",
+    "runtime-main.js": "/tutesuite-frontend/static/js/runtime-main.4873c5b9.js",
+    "runtime-main.js.map": "/tutesuite-frontend/static/js/runtime-main.4873c5b9.js.map",
     "static/css/2.4f8976c6.chunk.css": "/tutesuite-frontend/static/css/2.4f8976c6.chunk.css",
-    "static/js/2.17950c75.chunk.js": "/tutesuite-frontend/static/js/2.17950c75.chunk.js",
-    "static/js/2.17950c75.chunk.js.map": "/tutesuite-frontend/static/js/2.17950c75.chunk.js.map",
-    "static/js/3.74b6c47d.chunk.js": "/tutesuite-frontend/static/js/3.74b6c47d.chunk.js",
-    "static/js/3.74b6c47d.chunk.js.map": "/tutesuite-frontend/static/js/3.74b6c47d.chunk.js.map",
+    "static/js/2.a3c9c38e.chunk.js": "/tutesuite-frontend/static/js/2.a3c9c38e.chunk.js",
+    "static/js/2.a3c9c38e.chunk.js.map": "/tutesuite-frontend/static/js/2.a3c9c38e.chunk.js.map",
+    "static/js/3.ecaf4559.chunk.js": "/tutesuite-frontend/static/js/3.ecaf4559.chunk.js",
+    "static/js/3.ecaf4559.chunk.js.map": "/tutesuite-frontend/static/js/3.ecaf4559.chunk.js.map",
     "index.html": "/tutesuite-frontend/index.html",
     "static/css/2.4f8976c6.chunk.css.map": "/tutesuite-frontend/static/css/2.4f8976c6.chunk.css.map",
     "static/css/main.d70d45c5.chunk.css.map": "/tutesuite-frontend/static/css/main.d70d45c5.chunk.css.map",
-    "static/js/2.17950c75.chunk.js.LICENSE.txt": "/tutesuite-frontend/static/js/2.17950c75.chunk.js.LICENSE.txt"
+    "static/js/2.a3c9c38e.chunk.js.LICENSE.txt": "/tutesuite-frontend/static/js/2.a3c9c38e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.ddfbdb23.js",
+    "static/js/runtime-main.4873c5b9.js",
     "static/css/2.4f8976c6.chunk.css",
-    "static/js/2.17950c75.chunk.js",
+    "static/js/2.a3c9c38e.chunk.js",
     "static/css/main.d70d45c5.chunk.css",
-    "static/js/main.0e7040bf.chunk.js"
+    "static/js/main.041e3f53.chunk.js"
   ]
 }
