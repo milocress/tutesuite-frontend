@@ -51,6 +51,8 @@ export const api = (creds) => async (op, params) => {
     case 'past_sessions': {
       return past_sessions(token, student_id)
     }
+    default:
+      break;
   };
 
 }
