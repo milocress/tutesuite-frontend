@@ -33,19 +33,19 @@ function App({ cookies }) {
     cookies.set('creds', creds, {path: '/'});
   }
 
-  useEffect(() => {
-    const creds = cookies.get('creds')
-    if (creds) {
-      const { token, user } = creds
-      dispatch({
-        type: SET_CREDENTIALS,
-        isLoggedIn: true,
-        token: token,
-        user: user,
-        api: api(creds)
-      })
-    }
-  }, []);
+  // useEffect(() => {
+  //   const creds = cookies.get('creds')
+  //   if (creds) {
+  //     const { token, user } = creds
+  //     dispatch({
+  //       type: SET_CREDENTIALS,
+  //       isLoggedIn: true,
+  //       token: token,
+  //       user: user,
+  //       api: api(creds)
+  //     })
+  //   }
+  // }, []);
 
   return (
     <div>

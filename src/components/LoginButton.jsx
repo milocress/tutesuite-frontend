@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from "./LoginModal"
 
-export default function LoginButton({ className, children }) {
+export default function LoginButton({ className, children, handle_login }) {
   const [loginModal, setLoginModal] = useState(false);
 
   const handleToggle = () => {
@@ -14,7 +14,7 @@ export default function LoginButton({ className, children }) {
         {children}
       </button>
       {loginModal 
-        ? <Modal toggle={handleToggle} login_success={this.props.handle_login}/>
+        ? <Modal toggle={handleToggle} login_success={handle_login}/>
         : null
       }
     </div>
